@@ -3,34 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>十二星座 Threads 流量大戰 - 即時排行榜</title>
+    <title>及時送愛 x 社群實驗基地 - @grain_lightup</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .zodiac-card { transition: all 0.3s ease; }
         .zodiac-card:hover { transform: translateY(-5px); }
         .rank-1 { background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border: 2px solid #fbbf24; }
+        .charity-banner { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%); }
+        .experiment-tag { background: #f3f4f6; color: #374151; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen p-4 md:p-8">
 
     <div class="max-w-4xl mx-auto">
+        
+        <div class="charity-banner rounded-2xl shadow-lg p-6 mb-8 text-white flex flex-col md:flex-row items-center justify-between transform transition hover:scale-[1.01]">
+            <div class="mb-4 md:mb-0 text-center md:text-left">
+                <h2 class="text-2xl font-black mb-1 flex items-center justify-center md:justify-start gap-2">
+                    <span>❤️</span> 及時送愛活動
+                </h2>
+                <p class="text-pink-100 text-sm mt-1">你的每一個關注，都能轉化為溫暖的力量。</p>
+            </div>
+            <a href="https://www.npochannel.net/ad2?AgentCode=20260311102708583&utm_source=threads&utm_medium=social&utm_content=link_in_bio"
+               target="_blank"
+               class="bg-white text-rose-600 px-6 py-3 rounded-full font-bold shadow-md hover:bg-rose-50 transition-colors">
+                立即響應支持
+            </a>
+        </div>
+
+        <section class="bg-white border-2 border-black rounded-2xl p-6 mb-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="experiment-tag">進行中實驗 #02</span>
+                <h2 class="text-xl font-bold italic underline">「用訂單把我們操爆吧！」🔥</h2>
+            </div>
+            <p class="text-gray-700 leading-relaxed mb-6">
+                覺得捐款看不到實質成效？我們用勞力算給你看！<br>
+                現在只要在 Threads 指定貼文留言「一張訂單截圖」，我們就出發去清出一包垃圾！<br>
+                <span class="font-bold text-black">你想看我們撿幾包，就下單幾份愛心。</span>
+            </p>
+            <a href="https://www.threads.com/@grain_lightup/post/DWoVIVjE47Q" 
+               target="_blank"
+               class="inline-flex items-center gap-2 bg-black text-white px-6 py-4 rounded-xl font-black hover:opacity-80 transition-all w-full justify-center">
+                <span>📦 前往貼文：上傳截圖換垃圾</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                </svg>
+            </a>
+        </section>
+
         <header class="text-center mb-10">
-            <h1 class="text-4xl font-black text-gray-900 mb-2">十二星座 Threads 流量大戰</h1>
-            <p class="text-gray-500">數據來自 @grain_lightup | 每 30 分鐘自動同步</p>
-            <div id="lastUpdate" class="text-xs text-gray-400 mt-2">最後更新時間：載入中...</div>
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <span class="experiment-tag">社群實驗 #01</span>
+                <h1 class="text-3xl font-black text-gray-900">十二星座 Threads 流量大戰</h1>
+            </div>
+            <p class="text-gray-500 text-sm">每 15 分鐘自動同步更新 | 數據來源 @grain_lightup</p>
+            <div id="lastUpdate" class="text-xs text-gray-400 mt-2">數據同步中...</div>
         </header>
 
-        <div id="leaderboard" class="space-y-4">
+        <div id="leaderboard" class="space-y-4 mb-16">
             <div class="text-center p-10">
                 <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                <p class="mt-2 text-gray-500">正在從試算表同步數據...</p>
             </div>
         </div>
+
+        <footer class="bg-gray-900 text-white rounded-3xl p-8 text-center">
+            <h3 class="text-xl font-bold mb-4">📡 社群實驗觀測站</h3>
+            <p class="text-gray-400 text-sm mb-6">我們致力於透過有趣的數據、挑戰與實驗，連結社群並傳遞正向價值。<br>未來將有更多像「十二星座」與「清垃圾挑戰」的實驗陸續登場！</p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <span class="bg-gray-800 text-xs px-4 py-2 rounded-full text-gray-400 border border-gray-700">#星座數據分析</span>
+                <span class="bg-gray-800 text-xs px-4 py-2 rounded-full text-gray-400 border border-gray-700">#體能換公益</span>
+                <span class="bg-gray-800 text-xs px-4 py-2 rounded-full text-gray-400 border border-gray-700">#行為實驗 (Coming Soon)</span>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800">
+                <p class="text-xs text-gray-500 font-bold tracking-widest uppercase italic">Stay Tuned | @grain_lightup</p>
+            </div>
+        </footer>
+
     </div>
 
     <script>
-        // --- 設定區 ---
-        // 請在此處貼上你在 GAS 部署後得到的網址
+
         const API_URL = "https://script.google.com/macros/s/AKfycbxefuOjZqoqnMcexTHLIDOE0eJu3e8aqSbA3Nrx4dFIcX03t8KSDM2EsZ2uVi92PL4/exec";
 
         async function updateLeaderboard() {
@@ -38,7 +91,6 @@
                 const response = await fetch(API_URL);
                 const data = await response.json();
 
-                // 1. 處理資料：提取星座名稱並排序
                 const processed = data.map(item => {
                     const match = item.text.match(/這篇是：(.*?)(?:\s|$)/);
                     return {
@@ -49,7 +101,6 @@
                     };
                 }).sort((a, b) => b.likes - a.likes);
 
-                // 2. 渲染畫面
                 const container = document.getElementById('leaderboard');
                 container.innerHTML = '';
 
@@ -79,20 +130,16 @@
                     container.appendChild(card);
                 });
 
-                document.getElementById('lastUpdate').innerText = `最後更新時間：${new Date().toLocaleTimeString()}`;
+                document.getElementById('lastUpdate').innerText = `最後同步時間：${new Date().toLocaleTimeString()}`;
 
             } catch (error) {
-                console.error("抓取資料失敗：", error);
-                document.getElementById('leaderboard').innerHTML = `<p class="text-center text-red-500">資料抓取失敗，請檢查 API 設定</p>`;
+                console.error("抓取失敗：", error);
+                document.getElementById('lastUpdate').innerHTML = `<span class="text-red-500 font-bold">同步失敗，重試中...</span>`;
             }
         }
 
-        // 初始載入
-       // 初始載入
         updateLeaderboard();
-
-        // 設定每 10 分鐘自動更新一次 (600000 毫秒 = 10分鐘)
-        setInterval(updateLeaderboard, 600000);
+        setInterval(updateLeaderboard, 900000); // 15 分鐘更新一次
     </script>
 </body>
 </html>
