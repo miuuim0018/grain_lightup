@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>十二星座 Threads 流量大戰 - 即時排行榜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .zodiac-card { transition: all 0.3s ease; }
+        .zodiac-card:hover { transform: translateY(-5px); }
+        .rank-1 { background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border: 2px solid #fbbf24; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-black text-gray-900 mb-2">十二星座 Threads 流量大戰</h1>
+            <p class="text-gray-500">數據來自 @grain_lightup | 每 30 分鐘自動同步</p>
+            <div id="lastUpdate" class="text-xs text-gray-400 mt-2">最後更新時間：載入中...</div>
+        </header>
+
+        <div id="leaderboard" class="space-y-4">
+            <div class="text-center p-10">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                <p class="mt-2 text-gray-500">正在從試算表同步數據...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 設定區 ---
+        // 請在此處貼上你在 GAS 部署後得到的網址
+        const API_URL = "https://script.google.com/macros/s/AKfycbxefuOjZqoqnMcexTHLIDOE0eJu3e8aqSbA3Nrx4dFIcX03t8KSDM2EsZ2uVi92PL4/exec";
+
+        async function updateLeaderboard() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                // 1. 處理資料：提取星座名稱並排序
+                const processed = data.map(item => {
+                    const match = item.text.match(/這篇是：(.*?)(?:\s|$)/);
+                    return {
+                        name: match ? match[1] : "未知星座",
+                        likes: parseInt(item.likes) || 0,
+                        link: item.link,
+                        replies: item.replies
+                    };
+                }).sort((a, b) => b.likes - a.likes);
+
+                // 2. 渲染畫面
+                const container = document.getElementById('leaderboard');
+                container.innerHTML = '';
+
+                processed.forEach((item, index) => {
+                    const isFirst = index === 0;
+                    const card = document.createElement('div');
+                    card.className = `zodiac-card flex items-center justify-between p-5 rounded-2xl shadow-sm bg-white ${isFirst ? 'rank-1' : 'border border-gray-100'}`;
+                    
+                    card.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            <span class="text-2xl font-black ${isFirst ? 'text-yellow-600' : 'text-gray-300'} w-8">#${index + 1}</span>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">${item.name}</h3>
+                                <p class="text-sm text-gray-400">${item.replies} 則回覆</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="text-right">
+                                <span class="block text-2xl font-black text-gray-900">${item.likes.toLocaleString()}</span>
+                                <span class="text-xs font-bold text-gray-400 uppercase">LIKES</span>
+                            </div>
+                            <a href="${item.link}" target="_blank" class="bg-black text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-800 transition-colors">
+                                前往按讚
+                            </a>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+
+                document.getElementById('lastUpdate').innerText = `最後更新時間：${new Date().toLocaleTimeString()}`;
+
+            } catch (error) {
+                console.error("抓取資料失敗：", error);
+                document.getElementById('leaderboard').innerHTML = `<p class="text-center text-red-500">資料抓取失敗，請檢查 API 設定</p>`;
+            }
+        }
+
+        // 初始載入
+       // 初始載入
+        updateLeaderboard();
+
+        // 設定每 10 分鐘自動更新一次 (600000 毫秒 = 10分鐘)
+        setInterval(updateLeaderboard, 600000);
+    </script>
+</body>
+</html>
