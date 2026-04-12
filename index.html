@@ -11,13 +11,25 @@
         .rank-1 { background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border: 2px solid #fbbf24; }
         .charity-banner { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%); }
         .experiment-tag { background: #f3f4f6; color: #374151; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        
+        /* 頁籤切換樣式 */
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .tab-btn { transition: all 0.2s; }
+        .tab-btn.active { 
+            color: #e11d48; 
+            border-bottom: 3px solid #e11d48; 
+            font-weight: 900;
+        }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen p-4 md:p-8">
 
     <div class="max-w-4xl mx-auto">
         
-        <div class="charity-banner rounded-2xl shadow-lg p-6 mb-8 text-white flex flex-col md:flex-row items-center justify-between transform transition hover:scale-[1.01]">
+        <div class="charity-banner rounded-2xl shadow-lg p-6 mb-6 text-white flex flex-col md:flex-row items-center justify-between transform transition hover:scale-[1.01]">
             <div class="mb-4 md:mb-0 text-center md:text-left">
                 <h2 class="text-2xl font-black mb-1 flex items-center justify-center md:justify-start gap-2">
                     <span>❤️</span> 及時送愛活動
@@ -31,45 +43,115 @@
             </a>
         </div>
 
-        <section class="bg-white border-2 border-black rounded-2xl p-6 mb-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <div class="flex items-center gap-2 mb-4">
-                <span class="experiment-tag">進行中實驗 #02</span>
-                <h2 class="text-xl font-bold italic underline">「用訂單把我們操爆吧！」🔥</h2>
-            </div>
-            <p class="text-gray-700 leading-relaxed mb-6">
-                覺得捐款看不到實質成效？我們用勞力算給你看！<br>
-                現在只要在 Threads 指定貼文留言「一張訂單截圖」，我們就出發去清出一包垃圾！<br>
-                <span class="font-bold text-black">你想看我們撿幾包，就下單幾份愛心。</span>
-            </p>
-            <a href="https://www.threads.com/@grain_lightup/post/DWoVIVjE47Q" 
-               target="_blank"
-               class="inline-flex items-center gap-2 bg-black text-white px-6 py-4 rounded-xl font-black hover:opacity-80 transition-all w-full justify-center">
-                <span>📦 前往貼文：上傳截圖換垃圾</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                </svg>
-            </a>
-        </section>
+        <nav class="flex justify-center space-x-2 md:space-x-8 border-b-2 border-gray-200 mb-8 pb-2">
+            <button onclick="switchTab('experiments')" id="btn-experiments" class="tab-btn active px-4 py-2 text-lg text-gray-500 hover:text-gray-900">
+                🚀 社群實驗基地
+            </button>
+            <button onclick="switchTab('about-charity')" id="btn-about-charity" class="tab-btn px-4 py-2 text-lg text-gray-500 hover:text-gray-900">
+                📖 關於「及時送愛」
+            </button>
+        </nav>
 
-        <header class="text-center mb-10">
-            <div class="flex items-center justify-center gap-2 mb-2">
-                <span class="experiment-tag">社群實驗 #01</span>
-                <h1 class="text-3xl font-black text-gray-900">十二星座 Threads 流量大戰</h1>
-            </div>
-            <p class="text-gray-500 text-sm">每 15 分鐘自動同步更新 | 數據來源 @grain_lightup</p>
-            <div id="lastUpdate" class="text-xs text-gray-400 mt-2">數據同步中...</div>
-        </header>
+        <div id="tab-experiments" class="tab-content active">
+            <section class="bg-white border-2 border-black rounded-2xl p-6 mb-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="experiment-tag">進行中實驗 #02</span>
+                    <h2 class="text-xl font-bold italic underline">「用訂單把我們操爆吧！」🔥</h2>
+                </div>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    覺得捐款看不到實質成效？我們用勞力算給你看！<br>
+                    現在只要在 Threads 指定貼文留言「一張訂單截圖」，我們就出發去清出一包垃圾！<br>
+                    <span class="font-bold text-black">你想看我們撿幾包，就下單幾份愛心。</span>
+                </p>
+                <a href="https://www.threads.com/@grain_lightup/post/DWoVIVjE47Q" 
+                   target="_blank"
+                   class="inline-flex items-center gap-2 bg-black text-white px-6 py-4 rounded-xl font-black hover:opacity-80 transition-all w-full justify-center">
+                    <span>📦 前往貼文：上傳截圖換垃圾</span>
+                </a>
+            </section>
 
-        <div id="leaderboard" class="space-y-4 mb-16">
-            <div class="text-center p-10">
-                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+            <header class="text-center mb-8">
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <span class="experiment-tag">社群實驗 #01</span>
+                    <h1 class="text-3xl font-black text-gray-900">十二星座 Threads 流量大戰</h1>
+                </div>
+                <p class="text-gray-500 text-sm">每 15 分鐘自動同步更新 | 數據來源 @grain_lightup</p>
+                <div id="lastUpdate" class="text-xs text-gray-400 mt-2">數據同步中...</div>
+            </header>
+
+            <div id="leaderboard" class="space-y-4 mb-16">
+                <div class="text-center p-10">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                </div>
             </div>
         </div>
 
-        <footer class="bg-gray-900 text-white rounded-3xl p-8 text-center">
+        <div id="tab-about-charity" class="tab-content">
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 mb-10 text-gray-800 leading-relaxed">
+                
+                <h2 class="text-3xl font-black text-gray-900 mb-6 text-center">什麼是「及時送愛」？</h2>
+                <div class="w-16 h-1 bg-rose-500 mx-auto mb-8 rounded-full"></div>
+
+                <p class="text-lg mb-6 font-bold text-rose-600 text-center">
+                    「愛，不一定是盛大的舉動，而是來自日常的一點關懷。」
+                </p>
+
+                <p class="mb-6">
+                    在台灣的各個角落，有許多比低收入戶還窘迫的<strong>「邊緣戶」</strong>。他們可能因為種種條件限制無法取得政府的社福補助，往往成為最容易被社會安全網遺忘的一群。
+                </p>
+
+                <p class="mb-8">
+                    我們本次推廣的<strong>及時送愛（配合 NPO Channel 公益平台「集食送愛」計畫）</strong>，正是為了接住這些家庭而發起的聯合募集行動。透過大眾在網路上的小額認購，將微小的力量匯聚起來，化作實際的物資與食物。
+                </p>
+
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span class="text-2xl">🍱</span> 我們的三大目標
+                </h3>
+                <div class="space-y-4 mb-10 bg-rose-50 p-6 rounded-2xl">
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                        <div>
+                            <strong class="block text-gray-900">孩童營養均衡</strong>
+                            <p class="text-sm text-gray-600 mt-1">為弱勢家庭的孩童加菜，提供成長期必需的營養菜品，讓發育不再因貧困而受限。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                        <div>
+                            <strong class="block text-gray-900">燉出家的溫度</strong>
+                            <p class="text-sm text-gray-600 mt-1">我們也募集電鍋等實用家電，幫助弱勢家庭輕鬆準備熱騰騰的飯菜，讓孩子回家時能聞到飯香，讓父母不再為做飯而煩惱。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                        <div>
+                            <strong class="block text-gray-900">資源直達邊緣戶</strong>
+                            <p class="text-sm text-gray-600 mt-1">深入台灣北、中、南、東及離島，由平台彙整後統一配送至最需要物資的弱勢角落。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center bg-gray-50 p-6 rounded-xl border border-gray-200">
+                    <h4 class="font-bold text-gray-900 mb-2">⚠️ 響應須知：愛心募集捐贈</h4>
+                    <p class="text-sm text-gray-600">
+                        在此活動中，<strong>購買者（捐贈者）不會收到實體商品</strong>。<br>
+                        您所認購的商品（如菜品、年菜、電鍋）將全數委由 NPO Channel 公益平台統一分配至受贈單位。
+                    </p>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <p class="mb-4 font-bold text-gray-800">邀請您一同響應，讓愛裝進鍋裡！</p>
+                    <a href="https://www.npochannel.net/ad2?AgentCode=20260311102708583&utm_source=threads&utm_medium=social&utm_content=link_in_bio"
+                       target="_blank"
+                       class="inline-block bg-rose-500 text-white px-8 py-4 rounded-full font-black text-lg shadow-lg hover:bg-rose-600 hover:-translate-y-1 transition-all">
+                        ❤️ 前往 NPO Channel 認購支持
+                    </a>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-gray-900 text-white rounded-3xl p-8 text-center mt-10">
             <h3 class="text-xl font-bold mb-4">📡 社群實驗觀測站</h3>
-            <p class="text-gray-400 text-sm mb-6">我們致力於透過有趣的數據、挑戰與實驗，連結社群並傳遞正向價值。<br>未來將有更多像「十二星座」與「清垃圾挑戰」的實驗陸續登場！</p>
+            <p class="text-gray-400 text-sm mb-6">我們致力於透過有趣的數據、挑戰與實驗，連結社群並傳遞正向價值。<br>未來將有更多有趣的實驗陸續登場！</p>
             <div class="flex flex-wrap justify-center gap-3">
                 <span class="bg-gray-800 text-xs px-4 py-2 rounded-full text-gray-400 border border-gray-700">#星座數據分析</span>
                 <span class="bg-gray-800 text-xs px-4 py-2 rounded-full text-gray-400 border border-gray-700">#體能換公益</span>
@@ -83,8 +165,23 @@
     </div>
 
     <script>
-       
- const API_URL = "https://script.google.com/macros/s/AKfycbxefuOjZqoqnMcexTHLIDOE0eJu3e8aqSbA3Nrx4dFIcX03t8KSDM2EsZ2uVi92PL4/exec";
+        // --- 頁籤切換邏輯 ---
+        function switchTab(tabId) {
+            // 隱藏所有內容
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            // 移除所有按鈕的 active 狀態
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            // 顯示選擇的內容並加上 active 狀態
+            document.getElementById('tab-' + tabId).classList.add('active');
+            document.getElementById('btn-' + tabId).classList.add('active');
+        }
+
+        // --- GAS API 資料抓取邏輯 ---
+        // ⚠️ 請務必將此網址替換為你在 GAS 部署後得到的網址！
+        // ⚠️ 請務必將此網址替換為你在 GAS 部署後得到的網址！
+        const API_URL = "https://script.google.com/macros/s/AKfycbxefuOjZqoqnMcexTHLIDOE0eJu3e8aqSbA3Nrx4dFIcX03t8KSDM2EsZ2uVi92PL4/exec";
+
 
         async function updateLeaderboard() {
             try {
