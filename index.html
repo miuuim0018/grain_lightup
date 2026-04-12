@@ -2,6 +2,15 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DSEVELHR8K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DSEVELHR8K');
+</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>及時送愛 x 社群實驗基地 - @grain_lightup</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,6 +21,7 @@
         .charity-banner { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%); }
         .experiment-tag { background: #f3f4f6; color: #374151; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
         
+        /* 頁籤切換動畫與樣式 */
         .tab-content { display: none; animation: fadeIn 0.5s; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -37,7 +47,7 @@
             </div>
             <a href="https://www.npochannel.net/ad2?AgentCode=20260311102708583&utm_source=threads&utm_medium=social&utm_content=link_in_bio"
                target="_blank"
-               class="bg-white text-rose-600 px-6 py-3 rounded-full font-bold shadow-md hover:bg-rose-50 transition-colors">
+               class="whitespace-nowrap bg-white text-rose-600 px-6 py-3 rounded-full font-bold shadow-md hover:bg-rose-50 transition-colors">
                 立即響應支持
             </a>
         </div>
@@ -52,12 +62,13 @@
         </nav>
 
         <div class="text-center mb-10">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold border border-blue-100">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold border border-blue-100 shadow-sm">
                 🎓 嘉義大學 數位學習設計與管理學系 製作
             </span>
         </div>
 
         <div id="tab-experiments" class="tab-content active">
+            
             <section class="bg-white border-2 border-black rounded-2xl p-6 mb-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                 <div class="flex items-center gap-2 mb-4">
                     <span class="experiment-tag">進行中實驗 #02</span>
@@ -91,11 +102,65 @@
         </div>
 
         <div id="tab-about-charity" class="tab-content">
-            <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 mb-10 text-gray-800">
-                <h2 class="text-2xl font-black mb-6 text-center">讓愛裝進鍋裡，溫暖邊緣家庭</h2>
-                <p class="mb-4">我們希望透過數位專長結合公益，讓更多人看見社會角落的需求...</p>
-                <div class="text-center mt-10">
-                    <a href="https://www.npochannel.net/ad2?AgentCode=20260311102708583&utm_source=threads&utm_medium=social&utm_content=link_in_bio" target="_blank" class="bg-rose-500 text-white px-8 py-4 rounded-full font-black">立即支持活動</a>
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 mb-10 text-gray-800 leading-relaxed">
+                
+                <h2 class="text-3xl font-black text-gray-900 mb-6 text-center">什麼是「及時送愛」？</h2>
+                <div class="w-16 h-1 bg-rose-500 mx-auto mb-8 rounded-full"></div>
+
+                <p class="text-lg mb-6 font-bold text-rose-600 text-center">
+                    「愛，不一定是盛大的舉動，而是來自日常的一點關懷。」
+                </p>
+
+                <p class="mb-6">
+                    在台灣的各個角落，有許多比低收入戶還窘迫的<strong>「邊緣戶」</strong>。他們可能因為種種條件限制無法取得政府的社福補助，往往成為最容易被社會安全網遺忘的一群。
+                </p>
+
+                <p class="mb-8">
+                    我們本次推廣的<strong>及時送愛（配合 NPO Channel 公益平台「集食送愛」計畫）</strong>，正是為了接住這些家庭而發起的聯合募集行動。透過大眾在網路上的小額認購，將微小的力量匯聚起來，化作實際的物資與食物。
+                </p>
+
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span class="text-2xl">🍱</span> 我們的三大目標
+                </h3>
+                <div class="space-y-4 mb-10 bg-rose-50 p-6 rounded-2xl">
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                        <div>
+                            <strong class="block text-gray-900">孩童營養均衡</strong>
+                            <p class="text-sm text-gray-600 mt-1">為弱勢家庭的孩童加菜，提供成長期必需的營養菜品，讓發育不再因貧困而受限。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                        <div>
+                            <strong class="block text-gray-900">燉出家的溫度</strong>
+                            <p class="text-sm text-gray-600 mt-1">我們也募集電鍋等實用家電，幫助弱勢家庭輕鬆準備熱騰騰的飯菜，讓孩子回家時能聞到飯香，讓父母不再為做飯而煩惱。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                        <div>
+                            <strong class="block text-gray-900">資源直達邊緣戶</strong>
+                            <p class="text-sm text-gray-600 mt-1">深入台灣北、中、南、東及離島，由平台彙整後統一配送至最需要物資的弱勢角落。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center bg-gray-50 p-6 rounded-xl border border-gray-200">
+                    <h4 class="font-bold text-gray-900 mb-2">⚠️ 響應須知：愛心募集捐贈</h4>
+                    <p class="text-sm text-gray-600">
+                        在此活動中，<strong>購買者（捐贈者）不會收到實體商品</strong>。<br>
+                        您所認購的商品（如菜品、年菜、電鍋）將全數委由 NPO Channel 公益平台統一分配至受贈單位。
+                    </p>
+                </div>
+                
+                <div class="mt-10 text-center">
+                    <p class="mb-4 font-bold text-gray-800">邀請您一同響應，讓愛裝進鍋裡！</p>
+                    <a href="https://www.npochannel.net/ad2?AgentCode=20260311102708583&utm_source=threads&utm_medium=social&utm_content=link_in_bio"
+                       target="_blank"
+                       class="inline-block bg-rose-500 text-white px-8 py-4 rounded-full font-black text-lg shadow-lg hover:bg-rose-600 hover:-translate-y-1 transition-all">
+                        ❤️ 前往 NPO Channel 認購支持
+                    </a>
                 </div>
             </div>
         </div>
@@ -116,13 +181,16 @@
             
             <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col items-center gap-2">
                 <p class="text-xs text-gray-500 font-bold uppercase italic tracking-widest">Crafted with Love by NCYU Students</p>
-                <p class="text-[10px] text-gray-600 uppercase tracking-tighter">© 2024 @grain_lightup All Rights Reserved</p>
+                <p class="text-[10px] text-gray-600 uppercase tracking-tighter mb-2">© 2024 @grain_lightup All Rights Reserved</p>
+                
+                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=grain_lightup_ncyu_project&count_bg=%23E11D48&title_bg=%231F2937&title=總瀏覽人次&edge_flat=true" alt="網站瀏覽人數"/>
             </div>
         </footer>
 
     </div>
 
     <script>
+        // 切換分頁功能
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -133,10 +201,13 @@
         const API_URL = "https://script.google.com/macros/s/AKfycbxefuOjZqoqnMcexTHLIDOE0eJu3e8aqSbA3Nrx4dFIcX03t8KSDM2EsZ2uVi92PL4/exec";
 
 
+        // 抓取數據與渲染排行榜
         async function updateLeaderboard() {
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
+                
+                // 過濾並排序資料
                 const processed = data.map(item => {
                     const match = item.text.match(/這篇是：(.*?)(?:\s|$)/);
                     return {
@@ -148,8 +219,9 @@
                 }).sort((a, b) => b.likes - a.likes);
 
                 const container = document.getElementById('leaderboard');
-                container.innerHTML = '';
+                container.innerHTML = ''; // 清空載入動畫
 
+                // 產生每一行星座卡片
                 processed.forEach((item, index) => {
                     const isFirst = index === 0;
                     const card = document.createElement('div');
@@ -172,14 +244,18 @@
                     `;
                     container.appendChild(card);
                 });
+                
+                // 更新時間戳記
                 document.getElementById('lastUpdate').innerText = `數據同步時間：${new Date().toLocaleTimeString()}`;
             } catch (error) {
                 console.error("抓取失敗：", error);
-                document.getElementById('lastUpdate').innerHTML = `<span class="text-red-500 font-bold">同步失敗</span>`;
+                document.getElementById('lastUpdate').innerHTML = `<span class="text-red-500 font-bold">同步失敗，檢查 GAS 網址是否正確</span>`;
             }
         }
 
+        // 網頁載入時立刻執行一次
         updateLeaderboard();
+        // 設定每 15 分鐘 (900000 毫秒) 自動更新一次
         setInterval(updateLeaderboard, 900000);
     </script>
 </body>
