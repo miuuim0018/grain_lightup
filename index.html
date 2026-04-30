@@ -726,6 +726,25 @@
             window.addEventListener("scroll", () => {
                 floatingBtn.style.display = window.scrollY > 400 ? "block" : "none";
             });
+
+            // 【新增功能】讓橫向圖片輪播區塊支援「滑鼠滾輪直接左右滑動」 UX 優化
+            const faqCarousels = document.querySelectorAll('.faq-carousel');
+            faqCarousels.forEach(carousel => {
+                carousel.addEventListener('wheel', function(e) {
+                    // 檢查容器的內容總寬度是否大於可視寬度 (確定真的有出現橫向卷軸才攔截)
+                    if (this.scrollWidth > this.clientWidth) {
+                        // 檢查是否已經滑到最左邊或最右邊
+                        const atLeftEdge = this.scrollLeft <= 0;
+                        const atRightEdge = Math.ceil(this.scrollLeft + this.clientWidth) >= this.scrollWidth;
+
+                        // 如果正在往下滾但還沒到最右邊，或是正在往上滾但還沒到最左邊
+                        if ((e.deltaY > 0 && !atRightEdge) || (e.deltaY < 0 && !atLeftEdge)) {
+                            e.preventDefault(); // 阻止網頁跟著上下滾動
+                            this.scrollLeft += e.deltaY; // 將上下滾動的幅度轉移給左右滑動
+                        }
+                    }
+                }, { passive: false }); // 必須設定為 false 才能使用 preventDefault
+            });
         });
     </script>
 </body>
