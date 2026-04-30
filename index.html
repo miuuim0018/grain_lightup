@@ -2,261 +2,691 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DSEVELHR8K"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DSEVELHR8K');
-</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>及時送愛 x 社群實驗基地 - @grain_lightup</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>集食・點光 | 嘉義大學數位系公益專案</title>
     <style>
-        .zodiac-card { transition: all 0.3s ease; }
-        .zodiac-card:hover { transform: translateY(-5px); }
-        .rank-1 { background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%); border: 2px solid #fbbf24; }
-        .charity-banner { background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%); }
-        .experiment-tag { background: #f3f4f6; color: #374151; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
-        
-        /* 頁籤切換動畫與樣式 */
-        .tab-content { display: none; animation: fadeIn 0.5s; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .tab-btn { transition: all 0.2s; }
-        .tab-btn.active { 
-            color: #e11d48; 
-            border-bottom: 3px solid #e11d48; 
-            font-weight: 900;
+        /* 基礎重置與變數設定 */
+        :root {
+            --primary-color: #8B5A2B;
+            --secondary-color: #F4EBE1;
+            --accent-color: #2E8B57;
+            --accent-hover: #246d44;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --bg-white: #FFFFFF;
+            --danger-color: #d9534f;
+            --fb-color: #1877F2;
+            --yt-color: #FF0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', '微軟正黑體', sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* 導覽列 */
+        header {
+            background-color: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: normal;
+        }
+
+        /* 主視覺區塊 */
+        .hero {
+            margin-top: 65px;
+            padding: 80px 20px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-white) 0%, var(--secondary-color) 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--text-light);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white !important;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--accent-hover);
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.4);
+        }
+
+        /* 倒數計時器 */
+        .countdown-wrapper {
+            background-color: var(--bg-white);
+            max-width: 600px;
+            margin: -20px auto 40px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            border-top: 4px solid var(--danger-color);
+        }
+
+        .countdown-title {
+            color: var(--danger-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .time-box {
+            background: var(--secondary-color);
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 70px;
+        }
+
+        .time-box span.number {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .time-box span.label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* 內容區塊共用設定 */
+        .section-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* 關於我們區塊 */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: var(--bg-white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .about-card {
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            background-color: var(--secondary-color);
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 20px;
+        }
+
+        .about-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        /* 影音紀錄區塊 - 全新質感卡片設計 */
+        .verification-card {
+            background-color: var(--bg-white);
+            padding: 35px 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border-top: 5px solid transparent;
+        }
+
+        .card-fb {
+            border-top-color: var(--fb-color);
+        }
+
+        .card-yt {
+            border-top-color: var(--yt-color);
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn-social {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
+            border-radius: 30px; /* 藥丸形狀，更現代 */
+            color: white !important;
+            font-weight: bold;
+            font-size: 1.05rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-social:hover { 
+            transform: translateY(-3px);
+        }
+
+        .btn-fb { 
+            background-color: var(--fb-color); 
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+        }
+        .btn-fb:hover { box-shadow: 0 6px 20px rgba(24, 119, 242, 0.4); }
+
+        .btn-yt { 
+            background-color: var(--yt-color); 
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+        .btn-yt:hover { box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4); }
+
+        /* 照片牆排版 (通用) */
+        .impact-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .impact-img-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            background: var(--secondary-color);
+            position: relative;
+            aspect-ratio: 4 / 3;
+            display: block;
+        }
+
+        .impact-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .impact-img-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-title {
+            text-align: left;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            margin: 30px 0 15px;
+            color: var(--text-dark);
+        }
+
+        /* 行動承諾區塊 */
+        .pledge-banner {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+
+        /* 圖解 FAQ 輪播區塊 */
+        .faq-carousel-container {
+            margin-bottom: 40px;
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .faq-carousel-container h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .faq-carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 15px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch; 
+        }
+
+        .faq-carousel::-webkit-scrollbar { height: 8px; }
+        .faq-carousel::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .faq-carousel::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 4px; }
+
+        .faq-carousel img {
+            height: 350px;
+            width: auto;
+            max-width: 90vw;
+            object-fit: contain;
+            flex-shrink: 0;
+            scroll-snap-align: center;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        /* 文字 FAQ 區塊 */
+        .faq-item {
+            background: var(--bg-white);
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-white);
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover { background-color: #fcfcfc; }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            color: var(--text-light);
+            border-top: 1px solid transparent;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+            border-top: 1px solid #eee;
+        }
+
+        .faq-icon { transition: transform 0.3s ease; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+
+        /* 懸浮按鈕 */
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent-color);
+            color: white !important;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.5);
+            z-index: 999;
+            display: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .floating-cta:hover { background-color: var(--accent-hover); }
+
+        /* 頁尾 */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+            padding-bottom: 80px;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; padding: 20px; }
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .section-container { padding: 40px 15px; }
+            .time-box { min-width: 60px; padding: 8px; }
+            .time-box span.number { font-size: 1.5rem; }
+            .impact-gallery { grid-template-columns: 1fr; }
+            .faq-carousel img { height: 300px; }
+            .verification-card { padding: 25px 20px; }
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen p-4 md:p-8">
+<body>
 
-    <div class="max-w-4xl mx-auto">
-        
-        <div class="charity-banner rounded-2xl shadow-lg p-6 mb-6 text-white flex flex-col md:flex-row items-center justify-between transform transition hover:scale-[1.01]">
-            <div class="mb-4 md:mb-0 text-center md:text-left">
-                <h2 class="text-2xl font-black mb-1 flex items-center justify-center md:justify-start gap-2">
-                    <span>❤️</span> 及時送愛活動
-                </h2>
-                <p class="text-pink-100 text-sm mt-1">你的每一個關注，都能轉化為溫暖的力量。</p>
+    <!-- 導覽列 -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://i.ibb.co/9JmKHMX/message-Image-1773944705295-0.jpg" alt="集食點光 Logo">
+                集食・點光
             </div>
-            <a href="https://www.npochannel.net/ad2?AgentCode=20260311102708583&utm_source=threads&utm_medium=social&utm_content=link_in_bio"
-               target="_blank"
-               class="whitespace-nowrap bg-white text-rose-600 px-6 py-3 rounded-full font-bold shadow-md hover:bg-rose-50 transition-colors">
-                立即響應支持
-            </a>
-        </div>
-
-        <nav class="flex justify-center space-x-2 md:space-x-8 border-b-2 border-gray-200 mb-4 pb-2">
-            <button onclick="switchTab('experiments')" id="btn-experiments" class="tab-btn active px-4 py-2 text-lg text-gray-500 hover:text-gray-900">
-                🚀 社群實驗基地
-            </button>
-            <button onclick="switchTab('about-charity')" id="btn-about-charity" class="tab-btn px-4 py-2 text-lg text-gray-500 hover:text-gray-900">
-                📖 關於「及時送愛」
-            </button>
-        </nav>
-
-        <div class="text-center mb-10">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-bold border border-blue-100 shadow-sm">
-                🎓 嘉義大學 數位學習設計與管理學系 製作
-            </span>
-        </div>
-
-        <div id="tab-experiments" class="tab-content active">
-            
-            <section class="bg-white border-2 border-black rounded-2xl p-6 mb-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="experiment-tag">進行中實驗 #02</span>
-                    <h2 class="text-xl font-bold italic underline">「用訂單把我們操爆吧！」🔥</h2>
-                </div>
-                <p class="text-gray-700 leading-relaxed mb-6">
-                    我們是嘉大數位的學生，現在只要在 Threads 指定貼文留言「一張訂單截圖」，我們就立刻出發清出一包垃圾！<br>
-                    <span class="font-bold text-black text-lg">大學生發瘋企劃，看你想看我們撿幾包！</span>
-                </p>
-                <a href="https://www.threads.com/@grain_lightup/post/DWoVIVjE47Q" 
-                   target="_blank"
-                   class="inline-flex items-center gap-2 bg-black text-white px-6 py-4 rounded-xl font-black hover:opacity-80 transition-all w-full justify-center">
-                    <span>📦 前往貼文：上傳截圖換垃圾</span>
-                </a>
-            </section>
-
-            <header class="text-center mb-8">
-                <div class="flex items-center justify-center gap-2 mb-2">
-                    <span class="experiment-tag">社群實驗 #01</span>
-                    <h1 class="text-3xl font-black text-gray-900">十二星座 Threads 流量大戰</h1>
-                </div>
-                <p class="text-gray-500 text-sm">每 15 分鐘自動同步更新 | 數據來源 @grain_lightup</p>
-                <div id="lastUpdate" class="text-xs text-gray-400 mt-2">數據同步中...</div>
-            </header>
-
-            <div id="leaderboard" class="space-y-4 mb-16">
-                <div class="text-center p-10">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
-                </div>
+            <div class="nav-links">
+                <a href="#about">專案背景</a>
+                <a href="#impact">行動驗證</a>
+                <a href="#transparency">公信力證明</a>
+                <a href="#faq">圖解 FAQ</a>
             </div>
         </div>
+    </header>
 
-        <div id="tab-about-charity" class="tab-content">
-            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 mb-10 text-gray-800 leading-relaxed">
-                
-                <h2 class="text-3xl font-black text-gray-900 mb-6 text-center">什麼是「及時送愛」？</h2>
-                <div class="w-16 h-1 bg-rose-500 mx-auto mb-8 rounded-full"></div>
+    <!-- 主視覺區 -->
+    <section class="hero">
+        <h1>日常發瘋，公益認真</h1>
+        <p>我們是嘉義大學數位系的學生團隊。我們承諾：你響應一單愛心物資，我們就去清出一包垃圾！<br>透過結合「弱勢援助」與「環境保護」，讓每一份善意發揮雙倍價值。</p>
+        <a href="https://www.npochannel.net/Ad2?AgentCode=20260311102708583" target="_blank" class="cta-btn">前往 NPO Channel 響應計畫</a>
+    </section>
 
-                <p class="text-lg mb-6 font-bold text-rose-600 text-center">
-                    「愛，不一定是盛大的舉動，而是來自日常的一點關懷。」
-                </p>
-
-                <p class="mb-6">
-                    在台灣的各個角落，有許多比低收入戶還窘迫的<strong>「邊緣戶」</strong>。他們可能因為種種條件限制無法取得政府的社福補助，往往成為最容易被社會安全網遺忘的一群。
-                </p>
-
-                <p class="mb-8">
-                    我們本次推廣的<strong>及時送愛（配合 NPO Channel 公益平台「集食送愛」計畫）</strong>，正是為了接住這些家庭而發起的聯合募集行動。透過大眾在網路上的小額認購，將微小的力量匯聚起來，化作實際的物資與食物。
-                </p>
-
-                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-                    <span class="text-2xl">🍱</span> 我們的三大目標
-                </h3>
-                <div class="space-y-4 mb-10 bg-rose-50 p-6 rounded-2xl">
-                    <div class="flex gap-4">
-                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
-                        <div>
-                            <strong class="block text-gray-900">孩童營養均衡</strong>
-                            <p class="text-sm text-gray-600 mt-1">為弱勢家庭的孩童加菜，提供成長期必需的營養菜品，讓發育不再因貧困而受限。</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">2</div>
-                        <div>
-                            <strong class="block text-gray-900">燉出家的溫度</strong>
-                            <p class="text-sm text-gray-600 mt-1">我們也募集電鍋等實用家電，幫助弱勢家庭輕鬆準備熱騰騰的飯菜，讓孩子回家時能聞到飯香，讓父母不再為做飯而煩惱。</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="w-8 h-8 shrink-0 bg-rose-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
-                        <div>
-                            <strong class="block text-gray-900">資源直達邊緣戶</strong>
-                            <p class="text-sm text-gray-600 mt-1">深入台灣北、中、南、東及離島，由平台彙整後統一配送至最需要物資的弱勢角落。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center bg-gray-50 p-6 rounded-xl border border-gray-200">
-                    <h4 class="font-bold text-gray-900 mb-2">⚠️ 響應須知：愛心募集捐贈</h4>
-                    <p class="text-sm text-gray-600">
-                        在此活動中，<strong>購買者（捐贈者）不會收到實體商品</strong>。<br>
-                        您所認購的商品（如菜品、年菜、電鍋）將全數委由 NPO Channel 公益平台統一分配至受贈單位。
-                    </p>
-                </div>
-                
-                <div class="mt-10 text-center">
-                    <p class="mb-4 font-bold text-gray-800">邀請您一同響應，讓愛裝進鍋裡！</p>
-                    <a href="https://www.npochannel.net/ad2?AgentCode=20260311102708583&utm_source=threads&utm_medium=social&utm_content=link_in_bio"
-                       target="_blank"
-                       class="inline-block bg-rose-500 text-white px-8 py-4 rounded-full font-black text-lg shadow-lg hover:bg-rose-600 hover:-translate-y-1 transition-all">
-                        ❤️ 前往 NPO Channel 認購支持
-                    </a>
-                </div>
-            </div>
+    <!-- 倒數計時器 -->
+    <div class="countdown-wrapper">
+        <div class="countdown-title">⏳ 課程專案挑戰倒數（至 5/17 截止）</div>
+        <div class="timer-display" id="countdown-timer">
+            <div class="time-box"><span class="number" id="days">00</span><span class="label">天</span></div>
+            <div class="time-box"><span class="number" id="hours">00</span><span class="label">時</span></div>
+            <div class="time-box"><span class="number" id="minutes">00</span><span class="label">分</span></div>
+            <div class="time-box"><span class="number" id="seconds">00</span><span class="label">秒</span></div>
         </div>
-
-        <footer class="bg-gray-900 text-white rounded-3xl p-10 text-center mt-10 border-b-8 border-blue-600">
-            <h3 class="text-xl font-black mb-2">📡 嘉大數位 · 社群實驗觀測站</h3>
-            <p class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">NCYU DLDM Team</p>
-            
-            <p class="text-gray-400 text-sm mb-8 max-w-lg mx-auto leading-relaxed">
-                我們是一群來自<strong>國立嘉義大學數位學習設計與管理學系</strong>的學生。我們相信數位科技不僅是工具，更是傳遞溫度的媒介。透過實驗與數據，我們想證明「流量」也可以很有意義。
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-3">
-                <span class="bg-gray-800 text-xs px-4 py-2 rounded-full text-gray-400 border border-gray-700">#嘉大數位</span>
-                <span class="bg-gray-800 text-xs px-4 py-2 rounded-full text-gray-400 border border-gray-700">#社會實驗</span>
-                <span class="bg-gray-800 text-xs px-4 py-2 rounded-full text-gray-400 border border-gray-700">#及時送愛</span>
-            </div>
-            
-            <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col items-center gap-2">
-                <p class="text-xs text-gray-500 font-bold uppercase italic tracking-widest">Crafted with Love by NCYU Students</p>
-                <p class="text-[10px] text-gray-600 uppercase tracking-tighter mb-2">© 2024 @grain_lightup All Rights Reserved</p>
-                
-                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=grain_lightup_ncyu_project&count_bg=%23E11D48&title_bg=%231F2937&title=總瀏覽人次&edge_flat=true" alt="網站瀏覽人數"/>
-            </div>
-        </footer>
-
     </div>
 
+    <!-- 專案背景與信任證明 -->
+    <section id="about" class="section-container">
+        <h2 class="section-title">這不是詐騙，這是一堂改變社會的課</h2>
+        <div class="about-grid">
+            <div class="about-content">
+                <p style="margin-bottom: 20px;">嗨，我們是來自<strong>國立嘉義大學數位學習設計與管理學系</strong>的學生。這一切始於我們的「電子商務」課程。</p>
+                <p style="margin-bottom: 20px;">我們並非不知名的網路賣家，而是由指導教授帶領，正式報名參與了由 NPO 組織與大專院校共同舉辦的<strong>「挺好 campus 公益永續挑戰賽」</strong>。</p>
+                <p>我們的目標很明確：利用所學的電商與數位行銷知識，為真實的社會弱勢群體募集實質的資源，同時透過實際的淨灘與掃街行動回饋環境。</p>
+            </div>
+            <div class="about-evidence">
+                <div class="about-card">
+                    <h3>🎓 官方賽事證明</h3>
+                    <p>了解我們參與的競賽背景：<br><a href="https://www.socialnetwork.com.tw/campus" target="_blank">挺好 campus 官方網站 ➔</a></p>
+                </div>
+                <div class="about-card">
+                    <h3>📰 媒體相關報導</h3>
+                    <p>競賽與專案的相關新聞紀錄：<br><a href="https://news.ltn.com.tw/news/life/breakingnews/5409736" target="_blank">自由時報報導連結 ➔</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 動態影音紀錄區 (優化版卡片設計) -->
+    <section class="section-container" style="padding-top: 0;">
+        <h2 class="section-title">實況紀錄與官方背書</h2>
+        
+        <div class="verification-card card-fb">
+            <h3 style="color: var(--text-dark); margin-bottom: 10px;">🌟 最高信任指標：合作社團法人官方發布紀錄</h3>
+            <p style="color: var(--text-light); margin-bottom: 0; font-size: 0.95rem;">我們不僅有自己拍攝的紀錄，合作的 NPO 組織也親自在他們的官方平台發布了相關影片，這是物資確實送達且受到官方認可的最強證明。</p>
+            <div class="btn-group">
+                <a href="https://www.facebook.com/watch/?v=25442150702129928" target="_blank" class="btn-social btn-fb">📘 觀看官方影片紀錄 (一)</a>
+                <a href="https://www.facebook.com/share/v/18WHD4h4cP/" target="_blank" class="btn-social btn-fb">📘 觀看官方影片紀錄 (二)</a>
+                <a href="https://www.facebook.com/watch/?v=1900173953952088" target="_blank" class="btn-social btn-fb">📘 觀看官方影片紀錄 (三)</a>
+            </div>
+        </div>
+
+        <div class="verification-card card-yt">
+            <h3 style="color: var(--text-dark); margin-bottom: 10px;">🎥 團隊實地走訪影音實錄</h3>
+            <p style="color: var(--text-light); margin-bottom: 0; font-size: 0.95rem;">除了靜態照片，我們也將淨灘、掃街與走訪物資銀行的過程記錄成影片，歡迎點擊前往 YouTube 觀看我們的實踐過程。</p>
+            <div class="btn-group">
+                <a href="https://youtu.be/WHdXQdWTM8I" target="_blank" class="btn-social btn-yt">▶️ 團隊影音實錄 (一)</a>
+                <a href="https://youtu.be/G7zSepxUJUg" target="_blank" class="btn-social btn-yt">▶️ 團隊影音實錄 (二)</a>
+                <a href="https://youtu.be/6GSpDSnhBak" target="_blank" class="btn-social btn-yt">▶️ 團隊影音實錄 (三)</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 實地走訪照片與淨灘掃街實況 -->
+    <section id="impact" class="section-container" style="background-color: var(--bg-white); border-radius: 15px;">
+        <h2 class="section-title">承諾驗證：我們的實際行動</h2>
+        <p style="text-align: center; margin-bottom: 30px; color: var(--text-light);">「口說無憑，眼見為憑。」以下是我們前往物資銀行確認去向，以及實際捲起袖子維護環境的現場照片。</p>
+        
+        <!-- 物資銀行照片 -->
+        <h3 class="gallery-title">📦 物資銀行實地走訪確認</h3>
+        <div class="impact-gallery">
+            <a href="https://ibb.co/6R4GhLfc" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/C5n4dDTp/1.jpg" alt="物資銀行現場 1"></a>
+            <a href="https://ibb.co/Lh9X13Cx" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/jZ3PDSLy/2.jpg" alt="物資銀行現場 2"></a>
+            <a href="https://ibb.co/0yX1j75n" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/yFRKn92N/3.jpg" alt="物資銀行現場 3"></a>
+            <a href="https://ibb.co/r2vGWLhJ" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/whYNvbq1/4.jpg" alt="物資銀行現場 4"></a>
+            <a href="https://ibb.co/Cpy3s3GM" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/tw6TPTrx/5.jpg" alt="物資銀行現場 5"></a>
+            <a href="https://ibb.co/nq0GSx63" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/JWd1PDmx/6.jpg" alt="物資銀行現場 6"></a>
+            <a href="https://ibb.co/rKD07pdx" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/Q7yQbHDP/7.jpg" alt="物資銀行現場 7"></a>
+        </div>
+
+        <!-- 民雄街道照片 -->
+        <h3 class="gallery-title">🧹 履行承諾：民雄街道清掃實況</h3>
+        <div class="impact-gallery">
+            <a href="https://ibb.co/BHMPNQF2" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/2046NCH3/S-17129538-0.jpg" alt="民雄街道清掃 1"></a>
+            <a href="https://ibb.co/QjprTXJd" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/fGq4yQXv/S-17129539-0.jpg" alt="民雄街道清掃 2"></a>
+        </div>
+
+        <!-- 淨灘照片 -->
+        <h3 class="gallery-title">🌊 履行承諾：實體淨灘行動紀錄</h3>
+        <div class="impact-gallery">
+            <a href="https://ibb.co/pryVSGST" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/bRJwkqkV/1.jpg" alt="淨灘紀錄 1"></a>
+            <a href="https://ibb.co/DHGRsYM6" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/pBWLGQKs/2.jpg" alt="淨灘紀錄 2"></a>
+            <a href="https://ibb.co/Fb3VGG6J" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/pvwyCC2Z/3.jpg" alt="淨灘紀錄 3"></a>
+            <a href="https://ibb.co/ymMn379k" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/FkfbPCrY/4.jpg" alt="淨灘紀錄 4"></a>
+        </div>
+    </section>
+
+    <!-- 行動承諾與去向證明 -->
+    <section id="transparency" class="section-container">
+        <div class="pledge-banner">
+            <h2>雙倍愛心企劃【你下單・我環保】</h2>
+            <p>一份訂單 = 一包垃圾！我們負責流汗淨灘與掃街，你負責點亮弱勢家庭的餐桌。</p>
+        </div>
+
+        <h2 class="section-title">物資與資金 100% 透明去向</h2>
+        <div class="about-grid" style="grid-template-columns: 1fr;">
+            <p><strong>我們不經手任何金流與實體物資。</strong></p>
+            <p>為確保公益的絕對透明與合法性，我們與台灣知名公益募款平台 <strong>NPO Channel</strong> 合作。當你透過我們的專屬連結認購物資時，款項會直接進入 NPO Channel 的系統，並由他們將實體物資 100% 直達需要的邊緣戶與弱勢家庭手中。</p>
+            
+            <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-top: 15px;">
+                <p>🔍 <strong>查證專區：</strong> 你可以點擊這裡查看 <a href="https://www.npochannel.net/NpoComp" target="_blank">NPO Channel 合作的合法公益團體名冊</a>，確認這是一個經得起檢驗的正規平台。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 圖解常見問題 (圖片輪播) -->
+    <section id="faq" class="section-container" style="padding-top: 0;">
+        <h2 class="section-title">秒懂懶人包：圖解常見問題</h2>
+        
+        <div class="faq-carousel-container">
+            <h3>📖 常見問題指南 (一) <span style="font-size: 0.9rem; color: var(--text-light); font-weight: normal;">向右滑動查看 👉</span></h3>
+            <div class="faq-carousel">
+                <img src="https://i.ibb.co/JWbSHkCj/4.jpg" alt="FAQ1-1">
+                <img src="https://i.ibb.co/RTXC1N7f/5.jpg" alt="FAQ1-2">
+                <img src="https://i.ibb.co/SwH0cw7W/6.jpg" alt="FAQ1-3">
+                <img src="https://i.ibb.co/cSrwvhJg/6-2.jpg" alt="FAQ1-4">
+                <img src="https://i.ibb.co/N2960HrV/6-3.jpg" alt="FAQ1-5">
+                <img src="https://i.ibb.co/qYtRMX4v/7.jpg" alt="FAQ1-6">
+                <img src="https://i.ibb.co/ZpqjGFL1/8.jpg" alt="FAQ1-7">
+                <img src="https://i.ibb.co/8LHLjdqk/9.jpg" alt="FAQ1-8">
+                <img src="https://i.ibb.co/xKhf6TNN/10.jpg" alt="FAQ1-9">
+            </div>
+        </div>
+
+        <div class="faq-carousel-container">
+            <h3>📖 常見問題指南 (二) <span style="font-size: 0.9rem; color: var(--text-light); font-weight: normal;">向右滑動查看 👉</span></h3>
+            <div class="faq-carousel">
+                <img src="https://i.ibb.co/3y08TYZK/2.png" alt="FAQ2-1">
+                <img src="https://i.ibb.co/5g7vtLgD/3.png" alt="FAQ2-2">
+                <img src="https://i.ibb.co/MDyPr4Ys/4.png" alt="FAQ2-3">
+                <img src="https://i.ibb.co/vxfdywBT/5.png" alt="FAQ2-4">
+                <img src="https://i.ibb.co/hx1WKpQp/6.png" alt="FAQ2-5">
+                <img src="https://i.ibb.co/SDKwRQyT/7.png" alt="FAQ2-6">
+            </div>
+        </div>
+        
+        <!-- 文字版 FAQ -->
+        <div class="faq-container" style="margin-top: 40px;">
+            <h3 style="text-align: center; margin-bottom: 20px;">文字版詳細解答</h3>
+            <div class="faq-item">
+                <div class="faq-question">1. 你們一直發文，是在賣商品牟利嗎？ <span class="faq-icon">➕</span></div>
+                <div class="faq-answer"><p>絕對不是。我們推廣的是「物資認購」而非一般商品買賣。所有認購的資金都會直接匯入 NPO Channel 平台，換成實際物資送到邊緣戶手中，團隊學生不會從中獲取任何利潤。</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">2. 我怎麼確定我捐的東西，真的會送到需要的人手上？ <span class="faq-icon">➕</span></div>
+                <div class="faq-answer"><p>這也是我們選擇與 NPO Channel 合作的原因。網頁上方有我們實地走訪確認物資去向的照片與官方認證影片，絕對經得起檢驗。</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">3. 為什麼一直 Po 文？一定要達到某個金額才能結束嗎？ <span class="faq-icon">➕</span></div>
+                <div class="faq-answer"><p>這是一堂有期限的課程專案與競賽，活動將於 5月17日 結束。因為時間緊迫，我們必須積極宣傳為弱勢群體募集資源，專案結束後我們會在主頁公開最終成果。</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">4. 淨灘跟物資認購到底有什麼關聯？情勒文案？ <span class="faq-icon">➕</span></div>
+                <div class="faq-answer"><p>這不是情緒勒索，而是我們的「行動承諾」。用實際的環保勞動來回報您的善心，讓這份愛心同時產生兩種社會價值。</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 國立嘉義大學數位系電子商務課程專案 - 集食・點光 團隊</p>
+        <p style="font-size: 0.9rem; margin-top: 10px; color: #aaa;">本專案隸屬於 挺好 campus 公益永續挑戰賽</p>
+    </footer>
+
+    <!-- 懸浮行動按鈕 -->
+    <a href="https://www.npochannel.net/Ad2?AgentCode=20260311102708583" target="_blank" class="floating-cta" id="floating-btn">我要響應愛心</a>
+
+    <!-- 互動功能指令碼 -->
     <script>
-        // 切換分頁功能
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById('tab-' + tabId).classList.add('active');
-            document.getElementById('btn-' + tabId).classList.add('active');
-        }
-
-        const API_URL = "https://script.google.com/macros/s/AKfycbxefuOjZqoqnMcexTHLIDOE0eJu3e8aqSbA3Nrx4dFIcX03t8KSDM2EsZ2uVi92PL4/exec";
-
-
-        // 抓取數據與渲染排行榜
-        async function updateLeaderboard() {
-            try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                
-                // 過濾並排序資料
-                const processed = data.map(item => {
-                    const match = item.text.match(/這篇是：(.*?)(?:\s|$)/);
-                    return {
-                        name: match ? match[1] : "未知星座",
-                        likes: parseInt(item.likes) || 0,
-                        link: item.link,
-                        replies: item.replies
-                    };
-                }).sort((a, b) => b.likes - a.likes);
-
-                const container = document.getElementById('leaderboard');
-                container.innerHTML = ''; // 清空載入動畫
-
-                // 產生每一行星座卡片
-                processed.forEach((item, index) => {
-                    const isFirst = index === 0;
-                    const card = document.createElement('div');
-                    card.className = `zodiac-card flex items-center justify-between p-5 rounded-2xl shadow-sm bg-white ${isFirst ? 'rank-1' : 'border border-gray-100'}`;
-                    card.innerHTML = `
-                        <div class="flex items-center gap-4">
-                            <span class="text-2xl font-black ${isFirst ? 'text-yellow-600' : 'text-gray-300'} w-8">#${index + 1}</span>
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-800">${item.name}</h3>
-                                <p class="text-sm text-gray-400">${item.replies} 則回覆</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-6">
-                            <div class="text-right">
-                                <span class="block text-2xl font-black text-gray-900">${item.likes.toLocaleString()}</span>
-                                <span class="text-xs font-bold text-gray-400 uppercase tracking-tighter">LIKES</span>
-                            </div>
-                            <a href="${item.link}" target="_blank" class="bg-black text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-gray-800 transition-colors">前往按讚</a>
-                        </div>
-                    `;
-                    container.appendChild(card);
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ 手風琴效果
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const parent = question.parentElement;
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        if (item !== parent) item.classList.remove('active');
+                    });
+                    parent.classList.toggle('active');
                 });
-                
-                // 更新時間戳記
-                document.getElementById('lastUpdate').innerText = `數據同步時間：${new Date().toLocaleTimeString()}`;
-            } catch (error) {
-                console.error("抓取失敗：", error);
-                document.getElementById('lastUpdate').innerHTML = `<span class="text-red-500 font-bold">同步失敗，檢查 GAS 網址是否正確</span>`;
-            }
-        }
+            });
 
-        // 網頁載入時立刻執行一次
-        updateLeaderboard();
-        // 設定每 15 分鐘 (900000 毫秒) 自動更新一次
-        setInterval(updateLeaderboard, 900000);
+            // 倒數計時器
+            const countDownDate = new Date("May 17, 2026 23:59:59").getTime();
+            const timer = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.getElementById("countdown-timer").innerHTML = "<div style='font-weight:bold; color:var(--danger-color); font-size:1.2rem;'>活動已結束，感謝大家的支持！</div>";
+                    return;
+                }
+
+                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }, 1000);
+
+            // 懸浮按鈕顯示邏輯
+            const floatingBtn = document.getElementById("floating-btn");
+            window.addEventListener("scroll", () => {
+                floatingBtn.style.display = window.scrollY > 300 ? "block" : "none";
+            });
+        });
     </script>
 </body>
 </html>
