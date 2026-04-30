@@ -25,15 +25,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* 改用更乾淨、具現代感的字體設定 */
             font-family: 'PingFang TC', 'Helvetica Neue', 'Microsoft JhengHei', sans-serif;
-            letter-spacing: 0.05em; /* 增加字距，提升呼吸感 */
+            letter-spacing: 0.05em;
         }
 
         body {
             background-color: var(--secondary-color);
             color: var(--text-dark);
-            line-height: 1.8; /* 增加行距 */
+            line-height: 1.8;
             scroll-behavior: smooth;
         }
 
@@ -47,7 +46,7 @@
             color: var(--accent-color);
         }
 
-        /* 導覽列 (極簡化) */
+        /* 導覽列 */
         header {
             background-color: rgba(250, 248, 245, 0.95);
             backdrop-filter: blur(5px);
@@ -77,7 +76,7 @@
         }
 
         .logo img {
-            width: 35px; /* 縮小 Logo */
+            width: 35px;
             height: 35px;
             border-radius: 50%;
             object-fit: cover;
@@ -97,7 +96,7 @@
             color: var(--primary-color);
         }
 
-        /* 主視覺區塊 (乾淨留白) */
+        /* 主視覺區塊 */
         .hero {
             margin-top: 60px;
             padding: 100px 20px 60px;
@@ -109,7 +108,7 @@
             font-size: 2.2rem;
             margin-bottom: 25px;
             color: var(--primary-color);
-            font-weight: 500; /* 取消粗體 */
+            font-weight: 500;
             letter-spacing: 0.15em;
         }
 
@@ -120,14 +119,13 @@
             color: var(--text-light);
         }
 
-        /* 主按鈕精緻化 */
         .cta-btn {
             display: inline-block;
             background-color: transparent;
             color: var(--primary-color) !important;
-            padding: 10px 28px; /* 縮小按鈕 */
+            padding: 10px 28px;
             border: 1px solid var(--primary-color);
-            border-radius: 4px; /* 微圓角代替大圓角 */
+            border-radius: 4px;
             font-size: 1rem;
             transition: all 0.4s ease;
         }
@@ -137,7 +135,7 @@
             color: var(--bg-white) !important;
         }
 
-        /* 倒數計時器 (線條化) */
+        /* 倒數計時器 */
         .countdown-wrapper {
             max-width: 500px;
             margin: -20px auto 50px;
@@ -172,7 +170,7 @@
             display: block;
             font-size: 1.8rem;
             color: var(--primary-color);
-            font-weight: 300; /* 細字體 */
+            font-weight: 300;
             line-height: 1.2;
         }
 
@@ -183,7 +181,7 @@
 
         /* 內容區塊共用設定 */
         .section-container {
-            max-width: 900px; /* 縮小寬度增加兩側留白 */
+            max-width: 900px;
             margin: 0 auto;
             padding: 70px 20px;
         }
@@ -199,7 +197,6 @@
             letter-spacing: 0.1em;
         }
 
-        /* 標題底線改為極細線 */
         .section-title::after {
             content: '';
             position: absolute;
@@ -211,7 +208,7 @@
             background-color: var(--border-light);
         }
 
-        /* 關於我們區塊 (去框線) */
+        /* 關於我們區塊 */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -237,7 +234,22 @@
             font-weight: normal;
         }
 
-        /* 影音紀錄區塊 - 極簡卡片 */
+        /* 特別強化純文字連結的視覺提示 (UX 優化) */
+        .text-link {
+            color: var(--danger-color); /* 使用莫蘭迪磚紅，跳脫一般文字 */
+            border-bottom: 1px solid var(--danger-color);
+            padding-bottom: 1px;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .text-link:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* 影音紀錄區塊 */
         .verification-card {
             background-color: var(--bg-white);
             padding: 40px 30px;
@@ -269,7 +281,6 @@
             margin-top: 30px;
         }
 
-        /* 按鈕精緻化設定 */
         .btn-social {
             display: inline-flex;
             align-items: center;
@@ -283,7 +294,6 @@
             cursor: pointer;
         }
 
-        /* 官方紀錄按鈕 (奶茶棕) */
         .btn-npo { 
             color: var(--earth-brown) !important;
             border-color: var(--earth-brown);
@@ -294,7 +304,6 @@
             color: var(--bg-white) !important;
         }
 
-        /* 團隊實錄按鈕 (莫蘭迪綠) */
         .btn-team { 
             color: var(--earth-green) !important;
             border-color: var(--earth-green);
@@ -328,7 +337,7 @@
             object-fit: cover;
             display: block;
             transition: transform 0.6s ease;
-            filter: grayscale(10%); /* 微微降低照片彩度融入版面 */
+            filter: grayscale(10%);
         }
 
         .impact-img-container:hover img {
@@ -347,7 +356,7 @@
             padding-bottom: 10px;
         }
 
-        /* 行動承諾區塊 (降低壓迫感) */
+        /* 行動承諾區塊 */
         .pledge-banner {
             background-color: var(--bg-white);
             border: 1px solid var(--border-light);
@@ -403,7 +412,7 @@
             background-color: var(--bg-white);
         }
 
-        /* 文字 FAQ 區塊 (極簡線條) */
+        /* 文字 FAQ 區塊 */
         .faq-item {
             border-bottom: 1px solid var(--border-light);
             margin-bottom: 0;
@@ -476,14 +485,23 @@
             font-size: 0.85rem;
         }
 
-        /* 響應式設計 */
+        /* 響應式設計：針對手機螢幕優化 */
         @media (max-width: 768px) {
             .about-grid { grid-template-columns: 1fr; gap: 30px; }
             .hero h1 { font-size: 1.8rem; }
             .nav-links { display: none; }
             .section-container { padding: 50px 20px; }
             .time-box span.number { font-size: 1.5rem; }
-            .impact-gallery { grid-template-columns: 1fr; gap: 15px; }
+            
+            .impact-gallery { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 10px; 
+            }
+            
+            .faq-carousel img { 
+                height: 220px; 
+            }
+
             .verification-card { padding: 30px 20px; }
             .btn-group { flex-direction: column; }
             .btn-social { width: 100%; }
@@ -538,11 +556,11 @@
             <div class="about-evidence">
                 <div class="about-card">
                     <h3>官方賽事證明</h3>
-                    <p><a href="https://www.socialnetwork.com.tw/campus" target="_blank">挺好 campus 官方網站</a></p>
+                    <p><a href="https://www.socialnetwork.com.tw/campus" target="_blank" class="text-link">挺好 campus 官方網站 ↗</a></p>
                 </div>
                 <div class="about-card">
                     <h3>媒體相關報導</h3>
-                    <p><a href="https://news.ltn.com.tw/news/life/breakingnews/5409736" target="_blank">自由時報報導連結</a></p>
+                    <p><a href="https://news.ltn.com.tw/news/life/breakingnews/5409736" target="_blank" class="text-link">自由時報報導連結 ↗</a></p>
                 </div>
             </div>
         </div>
@@ -553,12 +571,12 @@
         <h2 class="section-title">實況紀錄與官方背書</h2>
         
         <div class="verification-card card-npo">
-            <h3>最高信任指標：合作社團法人官方發布紀錄</h3>
-            <p>我們不僅有自己拍攝的紀錄，合作的 NPO 組織也親自在他們的官方平台發布了相關影片，這是物資確實送達且受到官方認可的最強證明。</p>
+            <h3>最高信任指標：媒體與社團法人官方見證</h3>
+            <p>本專案不僅由我們自行紀錄，更獲得主流媒體（人間衛視）報導，以及合作之 NPO 組織（嘉義縣慈善團體聯合協會）官方發布的確實驗收影片，成為物資順利送達的最強證明。</p>
             <div class="btn-group">
-                <a href="https://www.facebook.com/watch/?v=25442150702129928" target="_blank" class="btn-social btn-npo">官方見證：物資抵達現場</a>
+                <a href="https://www.facebook.com/reel/2440056816431533" target="_blank" class="btn-social btn-npo">人間衛視 專題報導</a>
+                <a href="https://www.facebook.com/watch/?v=25442150702129928" target="_blank" class="btn-social btn-npo">嘉義慈協 官方見證</a>
                 <a href="https://www.facebook.com/share/v/18WHD4h4cP/" target="_blank" class="btn-social btn-npo">NPO 頻道實地走訪</a>
-                <a href="https://www.facebook.com/watch/?v=1900173953952088" target="_blank" class="btn-social btn-npo">受贈單位見證紀實</a>
             </div>
         </div>
 
@@ -620,7 +638,7 @@
             <p>為確保公益的絕對透明與合法性，我們與台灣知名公益募款平台 <strong>NPO Channel</strong> 合作。當你透過我們的專屬連結認購物資時，款項會直接進入 NPO Channel 的系統，並由他們將實體物資 100% 直達需要的邊緣戶與弱勢家庭手中。</p>
             
             <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-light);">
-                <p>查證專區：您可以點擊這裡查看 <a href="https://www.npochannel.net/NpoComp" target="_blank">NPO Channel 合作的合法公益團體名冊</a>，確認這是一個經得起檢驗的正規平台。</p>
+                <p>查證專區：您可以點擊這裡查看 <a href="https://www.npochannel.net/NpoComp" target="_blank" class="text-link">NPO Channel 合作的合法公益團體名冊 ↗</a>，確認這是一個經得起檢驗的正規平台。</p>
             </div>
         </div>
     </section>
@@ -656,24 +674,28 @@
             </div>
         </div>
         
-        <!-- 文字版 FAQ -->
+        <!-- 文字版 FAQ (專業化升級版) -->
         <div class="faq-container" style="margin-top: 60px;">
             <h3 style="text-align: center; margin-bottom: 30px; font-weight: normal; color: var(--primary-color);">文字版詳細解答</h3>
+            
             <div class="faq-item">
                 <div class="faq-question">1. 你們一直發文，是在賣商品牟利嗎？ <span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>絕對不是。我們推廣的是「物資認購」而非一般商品買賣。所有認購的資金都會直接匯入 NPO Channel 平台，換成實際物資送到邊緣戶手中，團隊學生不會從中獲取任何利潤。</p></div>
+                <div class="faq-answer"><p>本專案的核心為「公益物資認購」，並非商業營利行為。團隊扮演傳遞資訊的橋樑，所有認購款項均由第三方募款平台（NPO Channel）直接代收，並全數轉換為實體物資分配至弱勢家庭。學生團隊全程不經手金流，亦無任何營利機制。</p></div>
             </div>
+            
             <div class="faq-item">
                 <div class="faq-question">2. 我怎麼確定我捐的東西，真的會送到需要的人手上？ <span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>這也是我們選擇與 NPO Channel 合作的原因。網頁上方有我們實地走訪確認物資去向的照片與官方認證影片，絕對經得起檢驗。</p></div>
+                <div class="faq-answer"><p>為確保責信與流程透明，我們特意選擇受政府監督之合法公益整合平台 NPO Channel 合作。物資派送皆具備完善的稽核與簽收紀錄。此外，團隊亦親自前往受贈之物資銀行進行實地履勘，並將紀錄影像全數公開於本網頁供大眾檢視。</p></div>
             </div>
+            
             <div class="faq-item">
                 <div class="faq-question">3. 為什麼一直 Po 文？一定要達到某個金額才能結束嗎？ <span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>這是一堂有期限的課程專案與競賽，活動將於 5月17日 結束。因為時間緊迫，我們必須積極宣傳為弱勢群體募集資源，專案結束後我們會在主頁公開最終成果。</p></div>
+                <div class="faq-answer"><p>本專案為嘉義大學結合「挺好 Campus 公益永續挑戰賽」之限期行動，推廣期至 2026 年 5 月 17 日止。考量專案時效性，我們透過提高社群曝光頻率以極大化募資效益。專案並無設定強制達標金額，但期望能在有限時間內為邊緣戶爭取最多資源，最終成效報告亦將於活動結束後公開發布。</p></div>
             </div>
+            
             <div class="faq-item">
                 <div class="faq-question">4. 淨灘跟物資認購到底有什麼關聯？情勒文案？ <span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>這不是情緒勒索，而是我們的「行動承諾」。用實際的環保勞動來回報您的善心，讓這份愛心同時產生兩種社會價值。</p></div>
+                <div class="faq-answer"><p>這並非情緒勒索，而是我們身為學生，想傳達感謝的具體方式。我們沒有豐厚的資金，但我們有行動力。因此我們提出「你響應愛心，我們去淨灘」的約定，用實際的環境清掃來回報大眾的善意。我們希望讓您的每一份認購，都能同時溫暖弱勢家庭的餐桌，也還給土地一片乾淨的風景。</p></div>
             </div>
         </div>
     </section>
