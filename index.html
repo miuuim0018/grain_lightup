@@ -382,7 +382,7 @@
             overflow-x: auto;
             gap: 20px;
             padding-bottom: 20px;
-            scroll-snap-type: x mandatory;
+            /* 移除 scroll-snap-type，避免與 JavaScript 滑鼠滾動功能產生拔河衝突 */
             -webkit-overflow-scrolling: touch; 
         }
 
@@ -396,7 +396,7 @@
             max-width: 85vw;
             object-fit: contain;
             flex-shrink: 0;
-            scroll-snap-align: center;
+            /* 移除 scroll-snap-align，讓捲動更自由滑順 */
             border-radius: 4px;
             border: 1px solid var(--border-light);
             background-color: var(--bg-white);
@@ -544,7 +544,6 @@
                 <p>我們的目標很明確：利用所學的電商與數位行銷知識，為真實的社會弱勢群體募集實質的資源，同時透過實際的淨灘與掃街行動回饋環境。</p>
             </div>
             <div class="about-evidence">
-                <!-- 新增的校方官方背書區塊 -->
                 <div class="about-card">
                     <h3>校方官方新聞</h3>
                     <p><a href="https://website.ncyu.edu.tw/etech/Subject/Detail/238651?nodeId=3304" target="_blank" class="text-link">嘉大數位系新聞稿 ↗</a></p>
@@ -665,7 +664,7 @@
             
             <div class="faq-item">
                 <div class="faq-question">1. 你們一直發文，是在賣商品牟利嗎？ <span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>本專案的核心為「公益物 মিলিটারি認購」，並非商業營利行為。團隊扮演傳遞資訊的橋樑，所有認購款項均由第三方募款平台（NPO Channel）直接代收，並全數轉換為實體物資分配至弱勢家庭。學生團隊全程不經手金流，亦無任何營利機制。</p></div>
+                <div class="faq-answer"><p>本專案的核心為「公益物資認購」，並非商業營利行為。團隊扮演傳遞資訊的橋樑，所有認購款項均由第三方募款平台（NPO Channel）直接代收，並全數轉換為實體物資分配至弱勢家庭。學生團隊全程不經手金流，亦無任何營利機制。</p></div>
             </div>
             
             <div class="faq-item">
@@ -732,23 +731,23 @@
                 floatingBtn.style.display = window.scrollY > 400 ? "block" : "none";
             });
 
-            // 【新增功能】讓橫向圖片輪播區塊支援「滑鼠滾輪直接左右滑動」 UX 優化
+            // 【徹底解決修復版】讓橫向圖片輪播區塊支援「滑鼠滾輪直接左右滑動」
             const faqCarousels = document.querySelectorAll('.faq-carousel');
             faqCarousels.forEach(carousel => {
                 carousel.addEventListener('wheel', function(e) {
-                    // 檢查容器的內容總寬度是否大於可視寬度 (確定真的有出現橫向卷軸才攔截)
+                    // 確保內容超出視窗才有卷軸可滾
                     if (this.scrollWidth > this.clientWidth) {
-                        // 檢查是否已經滑到最左邊或最右邊
-                        const atLeftEdge = this.scrollLeft <= 0;
-                        const atRightEdge = Math.ceil(this.scrollLeft + this.clientWidth) >= this.scrollWidth;
+                        // 增加 1px 容錯率，解決瀏覽器小數點運算誤差導致提早卡死的問題
+                        const atLeftEdge = this.scrollLeft <= 1;
+                        const atRightEdge = Math.ceil(this.scrollLeft + this.clientWidth) >= (this.scrollWidth - 1);
 
-                        // 如果正在往下滾但還沒到最右邊，或是正在往上滾但還沒到最左邊
+                        // 判斷是否需要攔截滾輪事件並改為橫向滾動
                         if ((e.deltaY > 0 && !atRightEdge) || (e.deltaY < 0 && !atLeftEdge)) {
-                            e.preventDefault(); // 阻止網頁跟著上下滾動
-                            this.scrollLeft += e.deltaY; // 將上下滾動的幅度轉移給左右滑動
+                            e.preventDefault(); 
+                            this.scrollLeft += e.deltaY * 1.5; // 放大 1.5 倍滾動係數，優化手感
                         }
                     }
-                }, { passive: false }); // 必須設定為 false 才能使用 preventDefault
+                }, { passive: false });
             });
         });
     </script>
