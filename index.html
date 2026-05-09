@@ -208,10 +208,10 @@
             background-color: var(--border-light);
         }
 
-        /* 活動成果數據牆 */
+        /* 活動成果數據牆 (更新為一排 4 格) */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-top: 30px;
         }
@@ -220,7 +220,7 @@
             background-color: var(--bg-white);
             border: 1px solid var(--border-light);
             border-radius: 8px;
-            padding: 30px 15px;
+            padding: 30px 10px;
             text-align: center;
             transition: transform 0.3s ease;
         }
@@ -231,7 +231,7 @@
         }
 
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--danger-color);
             font-weight: 500;
             line-height: 1.1;
@@ -239,19 +239,19 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: baseline; /* 讓數字與單位底部完美切齊 */
+            align-items: baseline; 
             gap: 4px;
         }
 
         .stat-unit {
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 500;
         }
 
         .stat-label {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-light);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
         }
 
         /* 關於我們區塊 */
@@ -282,7 +282,7 @@
 
         /* 特別強化純文字連結的視覺提示 (UX 優化) */
         .text-link {
-            color: var(--danger-color);
+            color: var(--danger-color); 
             border-bottom: 1px solid var(--danger-color);
             padding-bottom: 1px;
             font-weight: 500;
@@ -552,8 +552,8 @@
             
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px;}
             .stat-card { padding: 20px 10px; }
-            .stat-number { font-size: 1.8rem; }
-            .stat-unit { font-size: 1rem; } 
+            .stat-number { font-size: 1.6rem; }
+            .stat-unit { font-size: 0.9rem; } 
             
             .impact-gallery { 
                 grid-template-columns: repeat(2, 1fr); 
@@ -607,23 +607,31 @@
         </div>
     </div>
 
-    <!-- 活動成果清單 (Dashboard) -->
+    <!-- 活動成果清單 (Dashboard) 完美 8 格版 -->
     <section id="results" class="section-container" style="padding-top: 20px;">
         <h2 class="section-title">專案影響力與活動成果</h2>
-        <p style="text-align: center; color: var(--text-light); margin-top: -30px;">（此為階段性統計，網頁數據非即時更新；最後更新時間：2026/05/09 20:05）</p>
+        <p style="text-align: center; color: var(--text-light); margin-top: -30px;">（此為階段性統計，網頁數據非即時更新；最後更新時間：2026/05/09 20:30）</p>
         
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number">345<span class="stat-unit">份</span></div>
+                <div class="stat-number">389<span class="stat-unit">份</span></div>
                 <div class="stat-label">愛心物資認購</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">100<span class="stat-unit">位</span></div>
+                <div class="stat-number">109<span class="stat-unit">位</span></div>
                 <div class="stat-label">善心參與者</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">123,680<span class="stat-unit">元</span></div>
+                <div class="stat-number">122<span class="stat-unit">次</span></div>
+                <div class="stat-label">愛心認購次數</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">139,814<span class="stat-unit">元</span></div>
                 <div class="stat-label">愛心認購總額</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">13<span class="stat-unit">個</span></div>
+                <div class="stat-label">支持公益計畫</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">93<span class="stat-unit">包</span></div>
@@ -648,6 +656,7 @@
                 <p>嗨，我們是來自<strong>國立嘉義大學數位學習設計與管理學系</strong>的學生。這一切始於我們的「電子商務」課程。</p>
                 <p>我們並非不知名的網路賣家，而是由指導教授帶領，正式報名參與了由 NPO 組織與大專院校共同舉辦的<strong>「挺好 campus 公益永續挑戰賽」</strong>。</p>
                 <p>我們的目標很明確：利用所學的電商與數位行銷知識，為真實的社會弱勢群體募集實質的資源，同時透過實際的淨灘與掃街行動回饋環境。</p>
+                <!-- 勸募字號防禦聲明 -->
                 <p><strong>NPO Channel 網頁上的每個集食送愛方案都有標示勸募字號。</strong></p>
             </div>
             <div class="about-evidence">
