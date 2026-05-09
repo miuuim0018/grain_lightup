@@ -208,6 +208,52 @@
             background-color: var(--border-light);
         }
 
+        /* 活動成果數據牆 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 30px 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--danger-color);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: baseline; /* 讓數字與單位底部完美切齊 */
+            gap: 4px;
+        }
+
+        .stat-unit {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            letter-spacing: 0.08em;
+        }
+
         /* 關於我們區塊 */
         .about-grid {
             display: grid;
@@ -236,7 +282,7 @@
 
         /* 特別強化純文字連結的視覺提示 (UX 優化) */
         .text-link {
-            color: var(--danger-color); /* 使用莫蘭迪磚紅，跳脫一般文字 */
+            color: var(--danger-color);
             border-bottom: 1px solid var(--danger-color);
             padding-bottom: 1px;
             font-weight: 500;
@@ -392,13 +438,25 @@
             overflow-x: auto;
             gap: 20px;
             padding-bottom: 20px;
-            /* 移除 scroll-snap-type，避免與 JavaScript 滑鼠滾動功能產生拔河衝突 */
             -webkit-overflow-scrolling: touch; 
         }
 
-        .faq-carousel::-webkit-scrollbar { height: 4px; }
-        .faq-carousel::-webkit-scrollbar-track { background: transparent; }
-        .faq-carousel::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
+        /* 橫向捲軸美化與加粗 */
+        .faq-carousel::-webkit-scrollbar { 
+            height: 10px; 
+        }
+        .faq-carousel::-webkit-scrollbar-track { 
+            background: var(--border-light); 
+            border-radius: 5px; 
+        }
+        .faq-carousel::-webkit-scrollbar-thumb { 
+            background: var(--accent-color); 
+            border-radius: 5px; 
+            border: 2px solid var(--border-light); 
+        }
+        .faq-carousel::-webkit-scrollbar-thumb:hover { 
+            background: var(--primary-color); 
+        }
 
         .faq-carousel img {
             height: 300px;
@@ -406,7 +464,6 @@
             max-width: 85vw;
             object-fit: contain;
             flex-shrink: 0;
-            /* 移除 scroll-snap-align，讓捲動更自由滑順 */
             border-radius: 4px;
             border: 1px solid var(--border-light);
             background-color: var(--bg-white);
@@ -493,6 +550,11 @@
             .section-container { padding: 50px 20px; }
             .time-box span.number { font-size: 1.5rem; }
             
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px;}
+            .stat-card { padding: 20px 10px; }
+            .stat-number { font-size: 1.8rem; }
+            .stat-unit { font-size: 1rem; } 
+            
             .impact-gallery { 
                 grid-template-columns: repeat(2, 1fr); 
                 gap: 10px; 
@@ -518,6 +580,7 @@
                 集食・點光
             </div>
             <div class="nav-links">
+                <a href="#results">活動成果</a>
                 <a href="#about">專案背景</a>
                 <a href="#impact">行動驗證</a>
                 <a href="#transparency">公信力證明</a>
@@ -543,6 +606,40 @@
             <div class="time-box"><span class="number" id="seconds">00</span><span class="label">秒</span></div>
         </div>
     </div>
+
+    <!-- 活動成果清單 (Dashboard) -->
+    <section id="results" class="section-container" style="padding-top: 20px;">
+        <h2 class="section-title">專案影響力與活動成果</h2>
+        <p style="text-align: center; color: var(--text-light); margin-top: -30px;">（此為階段性統計，網頁數據非即時更新；最終成果將於 5/17 活動結束後正式結算）</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">213<span class="stat-unit">份</span></div>
+                <div class="stat-label">愛心物資認購</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">71<span class="stat-unit">位</span></div>
+                <div class="stat-label">善心參與者</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">76,726<span class="stat-unit">元</span></div>
+                <div class="stat-label">愛心認購總額</div>
+            </div>
+            <div class="stat-card">
+                <!-- 等待後續更新的資料，目前保留 --- -->
+                <div class="stat-number">---<span class="stat-unit">包</span></div>
+                <div class="stat-label">環境垃圾清除</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4<span class="stat-unit">處</span></div>
+                <div class="stat-label">在地環境清理</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">136.3<span class="stat-unit">萬次</span></div>
+                <div class="stat-label">社群回響觸及</div>
+            </div>
+        </div>
+    </section>
 
     <!-- 專案背景與信任證明 -->
     <section id="about" class="section-container">
@@ -590,7 +687,7 @@
         <h2 class="section-title">承諾驗證：我們的實際行動</h2>
         <p style="text-align: center; margin-bottom: 30px; color: var(--text-light);">「口說無憑，眼見為憑。」以下是我們親自前往物資銀行確認去向並協助包裝，以及實際捲起袖子維護環境的現場紀錄。</p>
         
-        <!-- 教授與各界響應合照 (新增區塊) -->
+        <!-- 教授與各界響應合照 -->
         <h3 class="gallery-title">師長支持：我們跟教授的合照!</h3>
         <div class="impact-gallery">
             <a href="https://ibb.co/39BZ7VtC" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/cSDn1Rzr/IMG-20260506-161206.jpg" alt="教授支持合影 1"></a>
@@ -599,12 +696,12 @@
             <a href="https://ibb.co/8gszBG1W" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/jkfV5qnc/IMG-20260506-161803.jpg" alt="教授支持合影 4"></a>
             <a href="https://ibb.co/WWZJ1tPn" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/27x4BNsq/IMG-20260506-160353.jpg" alt="教授支持合影 5"></a>
             <a href="https://ibb.co/v6JwFZgN" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/NdLVvZQ0/IMG-20260506-160543.jpg" alt="教授支持合影 6"></a>
-            <a href="https://ibb.co/3yns1DMZ" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/1fknZDdW/IMG-20260506-163019.jpg" alt="教授支持合影 7"></a>
+            <a href="https://ibb.co/3yns1DMZ" target="_blank" class="impact-img-container"><img src="https://i.i.ibb.co/1fknZDdW/IMG-20260506-163019.jpg" alt="教授支持合影 7"></a>
             <a href="https://ibb.co/whk2SYwn" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/v4FM3DQN/IMG-20260506-155741.jpg" alt="教授支持合影 8"></a>
             <a href="https://ibb.co/h1nQk0mN" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/6Jp92QWS/IMG-20260506-154135.jpg" alt="教授支持合影 9"></a>
         </div>
 
-        <!-- 物資銀行照片 (將影片按鈕整合至標題內，呈現並排效果) -->
+        <!-- 物資銀行照片 -->
         <h3 class="gallery-title" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
             <span>物資銀行實地走訪確認</span>
             <a href="https://youtu.be/ADopmvTclbg" target="_blank" class="btn-social btn-team" style="font-size: 0.9rem; padding: 6px 16px; margin-top: 0;">
@@ -760,20 +857,19 @@
                 floatingBtn.style.display = window.scrollY > 400 ? "block" : "none";
             });
 
-            // 【徹底解決修復版】讓橫向圖片輪播區塊支援「滑鼠滾輪直接左右滑動」
+            // 讓橫向圖片輪播區塊支援「滑鼠滾輪直接左右滑動」
             const faqCarousels = document.querySelectorAll('.faq-carousel');
             faqCarousels.forEach(carousel => {
                 carousel.addEventListener('wheel', function(e) {
                     // 確保內容超出視窗才有卷軸可滾
                     if (this.scrollWidth > this.clientWidth) {
-                        // 增加 1px 容錯率，解決瀏覽器小數點運算誤差導致提早卡死的問題
                         const atLeftEdge = this.scrollLeft <= 1;
                         const atRightEdge = Math.ceil(this.scrollLeft + this.clientWidth) >= (this.scrollWidth - 1);
 
                         // 判斷是否需要攔截滾輪事件並改為橫向滾動
                         if ((e.deltaY > 0 && !atRightEdge) || (e.deltaY < 0 && !atLeftEdge)) {
                             e.preventDefault(); 
-                            this.scrollLeft += e.deltaY * 1.5; // 放大 1.5 倍滾動係數，優化手感
+                            this.scrollLeft += e.deltaY * 1.5; 
                         }
                     }
                 }, { passive: false });
