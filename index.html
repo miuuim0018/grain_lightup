@@ -288,6 +288,7 @@
             font-weight: 500;
             display: inline-block;
             margin-top: 5px;
+            word-break: break-all;
         }
         
         .text-link:hover {
@@ -338,6 +339,7 @@
             background-color: transparent;
             border: 1px solid;
             cursor: pointer;
+            text-align: center;
         }
 
         .btn-npo { 
@@ -610,7 +612,7 @@
     <!-- 活動成果清單 (Dashboard) 完美 8 格版 -->
     <section id="results" class="section-container" style="padding-top: 20px;">
         <h2 class="section-title">專案影響力與活動成果</h2>
-        <p style="text-align: center; color: var(--text-light); margin-top: -30px;">（此為階段性統計，網頁數據非即時更新；最後更新時間：2026/05/09 20:30）</p>
+        <p style="text-align: center; color: var(--text-light); margin-top: -30px;">（此為階段性統計，網頁數據非即時更新；最後更新時間：2026/05/09 20:05）</p>
         
         <div class="stats-grid">
             <div class="stat-card">
@@ -642,7 +644,7 @@
                 <div class="stat-label">在地環境清理</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">143.9<span class="stat-unit">萬次</span></div>
+                <div class="stat-number">136.3<span class="stat-unit">萬次</span></div>
                 <div class="stat-label">社群回響觸及</div>
             </div>
         </div>
@@ -671,22 +673,25 @@
                 <div class="about-card">
                     <h3>媒體相關報導</h3>
                     <p><a href="https://news.ltn.com.tw/news/life/breakingnews/5409736" target="_blank" class="text-link">自由時報報導連結 ↗</a></p>
+                    <p><a href="https://www.facebook.com/reel/2440056816431533" target="_blank" class="text-link">人間衛視報導 ↗</a></p>
+                    <p><a href="https://csr.cw.com.tw/article/44571" target="_blank" class="text-link">三年公益認購近10萬份物資 ↗</a></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 動態影音紀錄區 -->
+    <!-- 受贈單位區塊 (套用方案二：專業責信風並修正語意) -->
     <section class="section-container" style="padding-top: 0;">
-        <h2 class="section-title">實況紀錄與官方背書</h2>
+        <h2 class="section-title">資源流向與受贈單位</h2>
         
         <div class="verification-card card-npo">
-            <h3>愛心流向透明：官方與媒體報導</h3>
-            <p>為了讓大家安心認購，我們整理了合作平台與在地協會的近期相關報導。透過主流媒體鏡頭與官方驗收紀錄，證明這是一項真實、合法且持續運作的公益計畫。</p>
+            <h3>100% 責信透明，物資直達前線</h3>
+            <p>為確保公益資源妥善運用，我們合作的 NPO Channel 平台採用「聯合募集」模式。實體物資不經學生團隊，而是由平台直接統籌並派發至以下四個合法登記的社福單位。完整的簽收機制，讓您的愛心發揮最大的實質效益。</p>
             <div class="btn-group">
-                <a href="https://www.facebook.com/watch/?v=25442150702129928" target="_blank" class="btn-social btn-npo">社團法人嘉義縣慈善團體聯合協會</a>
-                <a href="https://www.facebook.com/reel/2440056816431533" target="_blank" class="btn-social btn-npo">人間衛視報導</a>
-                <a href="https://csr.cw.com.tw/article/44571" target="_blank" class="btn-social btn-npo">三年公益認購近10萬份物資</a>
+                <a href="https://www.3226666.org.tw/" target="_blank" class="btn-social btn-npo">社團法人高雄市慈善團體聯合總會</a>
+                <a href="https://www.newlifesw.org.tw/" target="_blank" class="btn-social btn-npo">社團法人中華民國新生活社會福利發展促進會</a>
+                <a href="https://hlof.eoffering.org.tw/" target="_blank" class="btn-social btn-npo">社團法人花蓮縣老人暨家庭關懷協會</a>
+                <a href="https://www.chiayi-charity.org.tw/" target="_blank" class="btn-social btn-npo">社團法人嘉義縣慈善團體聯合協會</a>
             </div>
         </div>
     </section>
@@ -694,7 +699,7 @@
     <!-- 實地走訪照片與淨灘掃街實況 -->
     <section id="impact" class="section-container">
         <h2 class="section-title">承諾驗證：我們的實際行動</h2>
-        <p style="text-align: center; margin-bottom: 30px; color: var(--text-light);">「口說無憑，眼見為憑。」以下是我們親自前往物資銀行確認去向並協助包裝，以及實際捲起袖子維護環境的現場紀錄。</p>
+        <p style="text-align: center; margin-bottom: 30px; color: var(--text-light);">「口說無憑，眼見為憑。」從教授們的全力支持、親赴物資銀行協助包裝，到實際捲起袖子淨灘與掃街，以下是我們將承諾化為具體行動的真實紀錄。</p>
         
         <!-- 教授與各界響應合照 -->
         <h3 class="gallery-title">師長支持：我們跟教授的合照!</h3>
@@ -710,7 +715,7 @@
             <a href="https://ibb.co/h1nQk0mN" target="_blank" class="impact-img-container"><img src="https://i.ibb.co/6Jp92QWS/IMG-20260506-154135.jpg" alt="教授支持合影 9"></a>
         </div>
 
-        <!-- 物資銀行照片 -->
+        <!-- 物資銀行照片 (將影片按鈕整合至標題內，呈現並排效果) -->
         <h3 class="gallery-title" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px;">
             <span>物資銀行實地走訪確認</span>
             <a href="https://youtu.be/ADopmvTclbg" target="_blank" class="btn-social btn-team" style="font-size: 0.9rem; padding: 6px 16px; margin-top: 0;">
@@ -754,7 +759,7 @@
         <h2 class="section-title">物資與資金 100% 透明去向</h2>
         <div class="about-grid" style="grid-template-columns: 1fr;">
             <p><strong>我們不經手任何金流與實體物資。</strong></p>
-            <p>為確保公益的絕對透明與合法性，我們與台灣知名公益募款平台 <strong>NPO Channel</strong> 合作。當你透過我們的專屬連結認購物資時，款項會直接進入 NPO Channel 的系統，並由他們將實體物資直線送達需要的邊緣戶與弱勢家庭手中。</p>
+            <p>為確保公益的絕對透明與合法性，我們與台灣知名公益募款平台 <strong>NPO Channel</strong> 合作。當你透過我們的專屬連結認購物資時，款項會直接進入 NPO Channel 的系統，參與本次的<strong>「聯合募集」計畫</strong>。實體物資將妥善分配至包含嘉義縣慈善團體聯合協會（嘉義慈協）在內的 <strong>4 個受贈公益單位</strong>，將愛心最大化，直線送達各地需要的邊緣戶與弱勢家庭手中。</p>
             
             <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-light);">
                 <p>查證專區：您可以點擊這裡查看 <a href="https://www.npochannel.net/NpoComp" target="_blank" class="text-link">NPO Channel 合作的合法公益團體名冊 ↗</a>，確認這是一個經得起檢驗的正規平台。</p>
@@ -804,7 +809,7 @@
             
             <div class="faq-item">
                 <div class="faq-question">2. 我怎麼確定我捐的東西，真的會送到需要的人手上？ <span class="faq-icon">+</span></div>
-                <div class="faq-answer"><p>本專案的所有認購物資，皆直接由合法公益整合平台「NPOchannel」統一處理與派送。我們身為協助推廣的大學生，全程不參與金流作業。物資送達在地協會後，皆具備嚴格的稽核與簽收紀錄，確保您的愛心 100% 透明且安全地送達弱勢家庭手中。</p></div>
+                <div class="faq-answer"><p>本專案的所有認購物資，皆直接由合法公益整合平台「NPO Channel」統一處理與派送。因平台採用<strong>「聯合募集」</strong>模式，物資將由其統一分配給包含嘉義慈協在內的 <strong>4 個公益單位</strong>。我們身為協助推廣的大學生，全程不參與金流作業。物資送達各個受贈單位後，皆具備嚴格的稽核與簽收紀錄，確保您的愛心 100% 透明且安全地送達弱勢家庭手中。</p></div>
             </div>
             
             <div class="faq-item">
